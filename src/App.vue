@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-	  <select v-model="langFrom">
-	  	<option v-for="(lang, i, value) in languages" :value="i">{{lang}}</option>
-	  </select>
-	  <select v-if="langFrom" v-model="langTo">
-	  	<option v-for="(lang, i, value) in languages" :value="i">{{lang}}</option>
-	  </select>
+
+    <select-language :source="apiUrl" v-on:onChangeValue="updatedLangFrom($event)"></select-language>
+    <select-language :source="apiUrl" v-on:onChangeValue="updatedLangTo($event)"></select-language>
+
 	  <div v-if="langFrom && langTo">
 	  		<input type="text" placeholder="enter your word" v-model="searchedWord" @keyup.enter="search($event.target.value)">
 			<button @click="switchLanguages(langFrom, langTo)">switch</button>
@@ -22,9 +20,15 @@
 <script>
 const API_URL = 'https://translate.yandex.net/api/v1.5/tr.json/';
 const API_KEY = 'trnsl.1.1.20180208T144525Z.0de95503d1a75cb8.e00c36889547605063341cb2c41b6a2cc11ddeae';
+
 import axios from'axios';
+import SelectLanguage from './components/Select.vue';
+
 
 export default {
+  components: {
+    'select-language': SelectLanguage
+  },
 	data() {
 		return {
 			translations: [],
@@ -32,10 +36,18 @@ export default {
 			langFrom: '',
 			langTo: '',
 			searchedWord: '',
-			word: ''
+			word: '',
+      apiUrl: API_URL+'getLangs?key='+API_KEY+'&ui=en'
 		}
 	},
 	methods: {
+    updatedLangFrom: function(e) {
+      this.langFrom = e
+      console.log(e);
+    },
+    updatedLangTo: function(e) {
+      this.langTo= e;
+    },
 		onSearch: function(e) {
       //this.searchedWord = e;
       this.search(e);
@@ -62,18 +74,7 @@ export default {
 				})
 		}
 	},
-	created() {
 
-			axios.get(API_URL+'getLangs?key='+API_KEY+'&ui=en')
-				.then(response => {
-					this.languages = response.data.langs;
-					console.log(response);
-				})
-				.catch(e => {
-					this.errors.push(e)
-				})
-
-	}
 }
 </script>
 

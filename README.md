@@ -1,6 +1,6 @@
 # translator
 
-> google translator
+> translator based on yandex.ru api
 
 ## Build Setup
 

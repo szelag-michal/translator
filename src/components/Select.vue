@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <select v-model="val" @change="onChange(val)">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text">{{placeholder}}</label>
+    </div>
+    <select v-model="val" @change="onChange(val)" class="">
       <option v-for="(lang, val, i) in languages" :value="val">{{lang}}</option>
     </select>
   </div>
@@ -12,6 +15,9 @@
       source: {
         type: [String, Array],
         required: true
+      },
+      placeholder: {
+        type: String
       }
     },
     data() {

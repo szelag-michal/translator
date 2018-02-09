@@ -46,7 +46,7 @@ export default {
 	data() {
 		return {
 			translations: [],
-
+      languages: [],
 			langFrom: '',
 			langTo: '',
 			searchedWord: '',

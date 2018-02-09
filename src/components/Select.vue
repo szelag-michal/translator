@@ -33,14 +33,7 @@
     },
     created() {
 
-      axios.get(this.source)
-        .then(response => {
-          this.languages = response.data.langs;
-          console.log(response);
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
+
 
     }
   }

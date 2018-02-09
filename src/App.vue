@@ -58,6 +58,10 @@ export default {
     exchange () {
       return faExchangeAlt
     },
+
+  },
+
+	methods: {
     search: function(e) {
       this.searchedWord = e;
       console.log(e);
@@ -70,9 +74,6 @@ export default {
           this.errors.push(e)
         })
     },
-  },
-
-	methods: {
     updatedLangFrom: function(e) {
       this.langFrom = e
     },
